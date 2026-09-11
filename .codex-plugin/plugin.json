@@ -1,0 +1,20 @@
+{
+  "name": "lecture-to-knowledge-map",
+  "version": "0.1.0",
+  "description": "将课件整理为分层 Mermaid 思维导图和可互链的 Obsidian 概念笔记。",
+  "author": {
+    "name": "yanglixian1106-design"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "课件转知识图谱",
+    "shortDescription": "将课件整理为分层 Mermaid 思维导图和可互链的 Obsidian 概念笔记。",
+    "longDescription": "按课程大纲组织知识层级，保留公式、案例与来源页码，生成 Mermaid 思维导图及 Obsidian 双向链接笔记，并提供只读链接校验脚本。",
+    "developerName": "yanglixian1106-design",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "使用 $lecture-to-knowledge-map，将这份课件整理成分层思维导图和 Obsidian 概念笔记。"
+  },
+  "repository": "https://github.com/yanglixian1106-design/lecture-to-knowledge-map",
+  "homepage": "https://github.com/yanglixian1106-design/lecture-to-knowledge-map"
+}

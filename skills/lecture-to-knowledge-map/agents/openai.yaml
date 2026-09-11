@@ -1,0 +1,6 @@
+interface:
+  display_name: "课件转分层思维导图与笔记"
+  short_description: "按课程大纲整理分层思维导图、概念笔记与可互链的 Obsidian 知识库"
+  default_prompt: "使用 $lecture-to-knowledge-map，将这份课件按课程大纲整理成分层思维导图和 Obsidian 概念笔记。"
+policy:
+  allow_implicit_invocation: true
