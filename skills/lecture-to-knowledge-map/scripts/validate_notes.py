@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only validation of a scoped Obsidian note collection (stdlib only)."""
+"""Read-only Obsidian validation; PDF page bounds require pypdf."""
 import argparse
 from collections import Counter
 from pathlib import Path
@@ -35,6 +35,7 @@ def scan(text):
 
 
 def validate(root, index, notes_dir, before=None, excludes=()):
+    root, index, notes_dir = root.resolve(), index.resolve(), notes_dir.resolve()
     errors = []
     if not root.is_dir() or not notes_dir.is_dir() or not index.is_file():
         return ['root/notes directory or index does not exist'], 0
@@ -50,7 +51,7 @@ def validate(root, index, notes_dir, before=None, excludes=()):
             by_name.setdefault(name, set()).add(p)
 
     def resolve(raw, origin):
-        target = raw.split('|', 1)[0].split('#', 1)[0].strip()
+        target = raw.replace('\\|', '|').split('|', 1)[0].split('#', 1)[0].strip()
         if not target:
             return origin
         if Path(target).is_absolute():
@@ -72,6 +73,7 @@ def validate(root, index, notes_dir, before=None, excludes=()):
             raise ValueError('ambiguous wiki target: ' + target)
         raise ValueError('missing wiki target: ' + target)
 
+    pdf_counts = {}
     graph, diagrams = {}, Counter()
     for p in files:
         prose, blocks, problems = scan(p.read_text(encoding='utf-8'))
@@ -82,7 +84,24 @@ def validate(root, index, notes_dir, before=None, excludes=()):
         prose = re.sub(r'(`+).*?\1', '', prose)
         for raw in re.findall(r'\[\[([^\]\n]+)\]\]', prose):
             try:
-                graph[p].add(resolve(raw, p))
+                resolved = resolve(raw, p)
+                graph[p].add(resolved)
+                link = raw.replace('\\|', '|').split('|', 1)[0]
+                if resolved.suffix.lower() == '.pdf' and '#page=' in link:
+                    anchor = link.split('#page=', 1)[1].split('&', 1)[0]
+                    if not anchor.isdigit():
+                        raise ValueError('invalid PDF page: ' + raw)
+                    if resolved not in pdf_counts:
+                        try:
+                            from pypdf import PdfReader
+                        except ImportError:
+                            raise ValueError('PDF page validation requires pypdf')
+                        try:
+                            pdf_counts[resolved] = len(PdfReader(resolved).pages)
+                        except Exception as exc:
+                            raise ValueError(f'cannot read PDF {resolved.name}: {exc}')
+                    if not 1 <= int(anchor) <= pdf_counts[resolved]:
+                        raise ValueError('PDF page outside document: ' + raw)
             except ValueError as exc:
                 errors.append(f'{p.name}: {exc}')
         if p != index and index not in graph[p]:
@@ -123,8 +142,8 @@ def main():
     if errors:
         print(f'FAIL: {len(errors)} issue(s), {count} notes checked', file=sys.stderr)
         return 1
-    print(f'PASS: {count} notes; targets, navigation, fences and requested diagram preservation checked.')
-    print('Not checked: anchor existence, Mermaid grammar/rendering, semantic completeness.')
+    print(f'PASS: {count} notes; targets, PDF page bounds, navigation, fences and requested diagram preservation checked.')
+    print('Not checked: non-PDF anchor existence, Mermaid grammar/rendering, semantic completeness.')
     return 0
 
 

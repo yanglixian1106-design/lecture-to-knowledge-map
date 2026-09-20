@@ -2,7 +2,7 @@
 
 将课件、讲义和学习笔记转换为 **Mermaid 分层思维导图**与 **Obsidian 互链概念笔记**的 Codex skill，附 Codex 插件清单。
 
-默认使用中文解释，保留英文关键概念。支持新建知识图谱、按指定大纲调整层级，以及将已有笔记拆分成互链笔记。
+默认以英文准确表述重要知识，并用中文补充直觉与讲解；思维导图节点采用中文在上、英文在下。支持新建知识图谱、按指定大纲调整层级，以及将已有笔记拆分成互链笔记。
 
 ## 功能
 
@@ -11,6 +11,8 @@
 - 生成总目录、章节与概念笔记，提供返回链接和相关概念链接。
 - 拆分已有笔记前保留完整备份；将课程图示放在对应概念旁。
 - 提供只读校验脚本，检查链接目标、目录可达性、返回链接与代码围栏。
+- 对完整多页课件使用缓存式提取、逐页检查记录和可恢复的分阶段转换流程。
+- 按任务读取 Mermaid、Obsidian、完整转换和校验规范，减少简单任务加载的无关指令。
 
 ## 安装为个人 skill
 
@@ -118,7 +120,7 @@ Mermaid 图表达笔记内部的知识层级；概念之间的跳转使用正文
 
 ## 校验生成的笔记
 
-需要 Python 3.9 或更高版本；脚本仅使用标准库。从仓库根目录运行：
+需要 Python 3.9 或更高版本。从仓库根目录运行；校验 PDF 页码范围时还需要 `pypdf`，缺少依赖会报告错误：
 
 ```sh
 python3 skills/lecture-to-knowledge-map/scripts/validate_notes.py \
@@ -138,8 +140,16 @@ python3 skills/lecture-to-knowledge-map/scripts/validate_notes.py \
 skills/lecture-to-knowledge-map/
 ├── SKILL.md
 ├── agents/openai.yaml
-├── references/obsidian-notes.md
-└── scripts/validate_notes.py
+├── references/
+│   ├── efficient-workflow.md
+│   ├── mermaid-style.md
+│   ├── obsidian-notes.md
+│   └── validation.md
+└── scripts/
+    ├── lecture_pipeline.py
+    ├── render_mermaid.cjs
+    ├── validate_notes.py
+    └── tests/test_pipeline.py
 ```
 
 本仓库仅包含可复用的 skill、参考规范和校验脚本，不包含课程资料或个人笔记。

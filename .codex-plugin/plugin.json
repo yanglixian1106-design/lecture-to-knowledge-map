@@ -1,6 +1,6 @@
 {
   "name": "lecture-to-knowledge-map",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "将课件整理为分层 Mermaid 思维导图和可互链的 Obsidian 概念笔记。",
   "author": {
     "name": "yanglixian1106-design"
