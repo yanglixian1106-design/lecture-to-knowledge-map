@@ -1,19 +1,19 @@
 {
   "name": "lecture-to-knowledge-map",
-  "version": "0.2.0",
-  "description": "将课件整理为分层 Mermaid 思维导图和可互链的 Obsidian 概念笔记。",
+  "version": "0.3.0",
+  "description": "Convert lecture slides into compact Mermaid maps and bilingual, page-by-page Obsidian notes with complete slide images.",
   "author": {
     "name": "yanglixian1106-design"
   },
   "skills": "./skills/",
   "interface": {
-    "displayName": "课件转知识图谱",
-    "shortDescription": "将课件整理为分层 Mermaid 思维导图和可互链的 Obsidian 概念笔记。",
-    "longDescription": "按课程大纲组织知识层级，保留公式、案例与来源页码，生成 Mermaid 思维导图及 Obsidian 双向链接笔记，并提供只读链接校验脚本。",
+    "displayName": "Lecture to Knowledge Map｜课件转知识图谱",
+    "shortDescription": "Convert lectures into chapter maps and page-by-page Obsidian notes｜将课件整理为章节导图与逐页笔记",
+    "longDescription": "Create compact Mermaid course maps and source-traceable Obsidian notes. Full-session conversions keep the index at chapter level and explain every source page with a complete slide image.｜生成紧凑 Mermaid 课程导图与可追溯 Obsidian 笔记；完整 Session 默认按章节组织并逐页配图讲解。",
     "developerName": "yanglixian1106-design",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "使用 $lecture-to-knowledge-map，将这份课件整理成分层思维导图和 Obsidian 概念笔记。"
+    "defaultPrompt": "Use $lecture-to-knowledge-map to organize this lecture into a compact chapter map and page-by-page Obsidian notes with complete slide images.｜使用 $lecture-to-knowledge-map 将这份课件整理为紧凑章节导图和逐页配图的 Obsidian 笔记。"
   },
   "repository": "https://github.com/yanglixian1106-design/lecture-to-knowledge-map",
   "homepage": "https://github.com/yanglixian1106-design/lecture-to-knowledge-map"

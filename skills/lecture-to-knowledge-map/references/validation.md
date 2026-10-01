@@ -32,4 +32,16 @@ Apply the figure checks in [obsidian-notes.md](obsidian-notes.md), including rea
 
 ## Full conversion
 
-Use the evidence ledger in [efficient-workflow.md](efficient-workflow.md) to verify every-page text/visual coverage and difficult content. Review original annotations, English statements, qualifiers, calculations, supplemental labels and annotation migration separately from scripts. Run linked-note, Mermaid and source-figure branches when those outputs are present. Keep full reports locally and return counts, paths and exceptions; read only failing excerpts during correction.
+Use the evidence ledger in [efficient-workflow.md](efficient-workflow.md) to verify every-page text/visual coverage and difficult content. Review original annotations, English statements, qualifiers, calculations, supplemental labels and annotation migration separately from scripts. Run linked-note, Mermaid and source-figure branches when those outputs are present.
+
+For full lecture/session notes, additionally verify:
+
+- The number of page entries equals the PDF page count; page numbers are continuous, unique and in source order across chapters.
+- Every page belongs to exactly one primary chapter, including title, agenda, transition and repeated animation pages.
+- Every page heading links to the matching PDF page and is immediately followed by exactly one matching complete-slide embed before its explanation.
+- Every complete-slide attachment exists in the permanent course attachment directory; its filename page number matches the heading and no final embed points into a cache or temporary directory.
+- Complete-slide images preserve the full frame, source aspect ratio, light opaque background, axes, legends, units and necessary context. Supplementary crops are clearly distinguished.
+- The session index links directly to chapters and its overview diagram stops at the chapter level. Chapter maps summarize internal knowledge without replacing the page-by-page body.
+- Chapter return and previous/next navigation works, and the embedded result is inspected in the target viewer. When dark mode is relevant, confirm actual text and chart contrast rather than assuming the image background is sufficient.
+
+Use a deterministic count/path check where possible, then inspect the images and rendered notes visually. Link existence alone does not prove correct page-image pairing, readability or semantic coverage. Keep full reports locally and return counts, paths and exceptions; read only failing excerpts during correction.
